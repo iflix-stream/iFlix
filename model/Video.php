@@ -8,10 +8,8 @@
 
 namespace model;
 
-use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\FFMpeg;
-use FFMpeg\Filters\Video\ResizeFilter;
 use FFMpeg\Format\Video\X264;
 use model\dao\VideoDAO;
 use util\Settings;
@@ -316,8 +314,8 @@ class Video extends MediaFactory
     public function processar()
     {
         $ffmpeg = FFMpeg::create(array(
-            'ffmpeg.binaries' => 'ffmpeg',
-            'ffprobe.binaries' => 'ffprobe',
+            'ffmpeg.binaries' => Settings::SERVER_PATH . '/assets/ffmpeg/linux/ffmpeg',
+            'ffprobe.binaries' => Settings::SERVER_PATH . '/assets/ffmpeg/linux/ffprobe',
             'timeout' => 3600, // The timeout for the underlying process
             'ffmpeg.threads' => 8,
         ));
@@ -328,10 +326,10 @@ class Video extends MediaFactory
         }
 
         $file = $ffmpeg->open(Settings::VIDEOS_PATH . "/{$tipo}/{$this->getId()}.mp4");
-        $file
-            ->filters()
-            ->resize(new Dimension(854, 480), ResizeFilter::RESIZEMODE_FIT)
-            ->synchronize();
+//        $file
+//            ->filters()
+//            ->resize(new Dimension(854, 480), ResizeFilter::RESIZEMODE_FIT)
+//            ->synchronize();
         $file
             ->frame(TimeCode::fromSeconds($this->duracao / 2))
             ->save(Settings::VIDEOS_PATH . "/{$tipo}/backgrounds/{$this->getId()}.jpg");

@@ -3,10 +3,10 @@
     "language": "pt_br",
     "link": {
       "database_technology": "mysql",
-      "database_name": "bd_iflix",
-      "url": "mysql:host=localhost;dbname=bd_iflix",
-      "user": "root",
-      "password": "",
+      "database_name": "u806284756_iflix",
+      "url": "mysql:host=mysql.hostinger.com;dbname=u806284756_iflix",
+      "user": "u806284756_root",
+      "password": "mlro1215",
       "connection_cache": true
     },
     "log": true,
